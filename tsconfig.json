@@ -14,5 +14,5 @@
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
     "nativewind-env.d.ts"
-  ]
+, "services/Http.js", "app/(tabs)/profile.js", "app/(tabs)/_layout.js", "app/(tabs)/index.js", "app/(tabs)/saved.js", "app/(tabs)/search.js", "app/_layout.js"  ]
 }
