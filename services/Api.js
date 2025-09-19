@@ -26,10 +26,22 @@ async function AxiosMiddleware(method, url, data = {}, options = {}) {
 }
 
 export default {
-  get: (url, data = {}, options = {}) => AxiosMiddleware("get", url, data, options),
-  post: (url, data = {}, options = {}) => AxiosMiddleware("post", url, data, options),
-  head: (url, data = {}, options = {}) => AxiosMiddleware("head", url, data, options),
-  patch: (url, data = {}, options = {}) => AxiosMiddleware("patch", url, data, options),
-  put: (url, data = {}, options = {}) => AxiosMiddleware("put", url, data, options),
-  delete: (url, data = {}, options = {}) => AxiosMiddleware("delete", url, data, options),
-};
+    get: (url, data = [], options = {}) => {
+        return AxiosMiddleware('get', url, data, options)
+    },
+    post: (url, data = [], options = {}) => {
+        return AxiosMiddleware('post', url, data, options)
+    },
+    head: (url, data = [], options = {}) => {
+        return AxiosMiddleware('head', url, data, options)
+    },
+    patch: (url, data = [], options = {}) => {
+        return AxiosMiddleware('patch', url, data, options)
+    },
+    put: (url, data = [], options = {}) => {
+        return AxiosMiddleware('put', url, data, options)
+    },
+    delete: (url, data = [], options = {}) => {
+        return AxiosMiddleware('delete', url, data, options)
+    }
+}

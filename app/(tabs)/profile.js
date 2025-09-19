@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, FlatList, Image } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import ApiService from "../../services/Api";
 
@@ -43,12 +44,14 @@ const MoviesScreen = () => {
   );
 
   return (
-    <FlatList
-      data={movies}
-      renderItem={renderItem}
-      keyExtractor={(item) => item.id.toString()}
-      contentContainerStyle={{ padding: 10 }}
-    />
+     <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
+       <FlatList
+         data={movies}
+         renderItem={renderItem}
+         keyExtractor={(item) => item.id.toString()}
+         contentContainerStyle={{ padding: 10 }}
+       />
+     </SafeAreaView>
   );
 };
 
