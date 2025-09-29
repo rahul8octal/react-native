@@ -1,11 +1,62 @@
-import { Text, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, Text, FlatList, Image } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+
+import ApiService from "../../services/Api";
+
 
 const Search = () => {
-  return (
-   <View className="flex-1 items-center justify-center">
-       <Text className="text-5xl text-blue-500 font-bold">search</Text>
-     </View>
-  )
-}
+  const [movies, setMovies] = useState([])
 
-export default Search
+  useEffect(() => {
+    const loadMovies = async () => {
+      try {
+
+        console.log(12);
+
+         const { data } = await ApiService.get("/discover/movie", {
+          include_adult: false,
+          include_video: false,
+          language: "en-US",
+          page: 1,
+          sort_by: "popularity.desc",
+        });
+        // console.log(data.results);
+        
+        setMovies(data.results);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    loadMovies();
+  }, []);
+
+  const renderItem = ({ item }) => (
+    <View className="flex-row mb-4 bg-white rounded-xl overflow-hidden shadow">
+      {item.poster_path && (
+        <Image
+          source={{ uri: `https://image.tmdb.org/t/p/w500${item.poster_path}` }}
+          className="w-[100px] h-[150px]"
+        />
+      )}
+      <View className="flex-1 p-3 justify-center">
+        <Text className="text-lg font-bold">{item.title}</Text>
+        <Text className="mt-1 text-gray-600">⭐ {item.vote_average}</Text>
+        </View>
+    </View>
+  );
+
+  return (
+     <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
+       <FlatList
+         data={movies}
+         renderItem={renderItem}
+         keyExtractor={(item) => item.id.toString()}
+         contentContainerStyle={{ padding: 10 }}
+       />
+     </SafeAreaView>
+  );
+};
+
+export default Search;
